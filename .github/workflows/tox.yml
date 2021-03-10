@@ -55,4 +55,4 @@ jobs:
           target: ${{ matrix.toxenv }}
         id: ran-tox
 
-      - run: cat '${{ steps.ran-tox.outputs.json_results_path }}'
+  gen-job: ${{ fromJSON('{"needs": "build", "runs-on": "ubuntu-latest"}, "name": "name", "steps": [{"run": "echo I am in"}]) }}
