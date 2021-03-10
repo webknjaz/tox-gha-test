@@ -55,6 +55,7 @@ jobs:
           target: ${{ matrix.toxenv }}
         id: ran-tox
       - uses: actions/setup-python@v2
+        if: always()
         with:
           python-version: 3.9
       - name: j res
