@@ -56,4 +56,4 @@ jobs:
         id: ran-tox
       - name: j res
         if: always()
-        run: echo '${{ steps.ran-tox.outputs.json-results }}'
+        run: echo '${{ steps.ran-tox.outputs.json-results }}' | python -m json.tool
