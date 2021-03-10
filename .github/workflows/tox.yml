@@ -59,8 +59,8 @@ jobs:
   gen-job:
     needs: build
     runs-on: ubuntu-latest
-    strategy: ${{ fromJSON('{"matrix": ' + needs.build.outputs.matrix + '}') }}
+    strategy:
+      matrix: ${{ fromJSON(needs.build.outputs.matrix) }}
 
     name: ${{ matrix.name }}
-    steps:
-      - run: echo in
+    steps: ${{ fromJSON('[{"run": "echo in"}]') }}
