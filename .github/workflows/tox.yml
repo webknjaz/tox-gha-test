@@ -54,5 +54,7 @@ jobs:
           mode: run-env
           target: ${{ matrix.toxenv }}
         id: ran-tox
-      - name: Run a one-line script
+      - name: j res
         run: echo '${{ steps.ran-tox.outputs.json-results }}'
+      - name: out
+        run: echo '${{ steps.ran-tox.outputs }}'
