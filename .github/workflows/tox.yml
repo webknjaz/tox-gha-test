@@ -35,7 +35,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo steps.discovered-tox.outputs.matrix
+        run: echo '${{ steps.discovered-tox.outputs.matrix }}'
   tests:
     needs: build
     runs-on: ubuntu-latest
