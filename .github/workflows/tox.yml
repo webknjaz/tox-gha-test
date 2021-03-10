@@ -55,4 +55,12 @@ jobs:
           target: ${{ matrix.toxenv }}
         id: ran-tox
 
-  gen-job: ${{ fromJSON("{\"needs\": \"build\", \"runs-on\": \"ubuntu-latest\", \"name\": \"name\", \"steps\": [{\"run\": \"echo I am in\"}]}") }}
+
+  gen-job:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy: ${{ fromJSON('{"matrix": ' + needs.build.outputs.matrix + '}') }}
+
+    name: ${{ matrix.name }}
+    steps:
+      - run: echo in
