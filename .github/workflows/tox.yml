@@ -54,6 +54,9 @@ jobs:
           mode: run-env
           target: ${{ matrix.toxenv }}
         id: ran-tox
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
       - name: j res
         if: always()
-        run: echo '${{ steps.ran-tox.outputs.json-results }}' | python -m json.tool
+        run: echo '${{ steps.ran-tox.outputs.json-results }}' | python3.9 -m json.tool
