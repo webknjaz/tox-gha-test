@@ -40,7 +40,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJSON(needs.build.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.build.outputs.matrix).matrix }}
 
     name: ${{ matrix.name }}
     steps:
