@@ -56,5 +56,3 @@ jobs:
         id: ran-tox
       - name: j res
         run: echo '${{ steps.ran-tox.outputs.json-results }}'
-      - name: out
-        run: echo '${{ steps.ran-tox.outputs }}'
