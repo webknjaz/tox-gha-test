@@ -16,4 +16,4 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    uses: .github/workflows/reusable/tox-dev/gh-action-tox/workflow.yml@experiments/composite-action
+    uses: tox-dev/gh-action-tox/.github/workflows/reusable/workflow.yml@experiments/composite-action
