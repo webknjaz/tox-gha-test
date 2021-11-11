@@ -18,4 +18,4 @@ jobs:
   matrix:
     name: >-
       [m]
-    uses: tox-dev/gh-action-tox/.github/workflows/call-tox.yml@experiments/composite-action
+    uses: tox-dev/workflow/.github/workflows/tox.yml@main
