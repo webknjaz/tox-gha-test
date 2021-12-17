@@ -22,6 +22,7 @@ jobs:
     with:
       tox-env-matrix-hook: |
         deadsnakes_job_3_10 = {
+          'custom-job-name': 'deadsnakes Python 3.10-dev',
           'python-version': '3.10-dev',
           'toxenv': 'py310',
         }
