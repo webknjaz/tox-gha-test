@@ -27,3 +27,19 @@ jobs:
           'toxenv': 'py310',
         }
         gha_matrix['include'].append(deadsnakes_job_3_10)
+
+  process-matrix:
+    needs:
+    - matrix
+
+    runs-on: Ubuntu
+    steps:
+    - run: echo '${{ needs.matrix.outputs.json-results }}'
+    - uses: actions/setup-python@v2
+      with:
+        python-version: >-
+          3.10
+    - run: >-
+        echo '${{ needs.matrix.outputs.json-results }}'
+        |
+        python3.10 -m json.tool
