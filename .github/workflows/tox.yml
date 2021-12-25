@@ -22,6 +22,8 @@ jobs:
     - uses: re-actors/build-python-dists@main
 
   matrix:
+    needs:
+    - build
     name: >-
       [m]
     uses: tox-dev/workflow/.github/workflows/tox.yml@main
