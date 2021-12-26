@@ -15,7 +15,19 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  sdist:
+    runs-on: Ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: re-actors/build-python-dists@main
+      with:
+        dist-type: sdist
+        workflow-artifact-name: python-package-distributions
+
+  wheel:
+    needs:
+    - sdist
     runs-on: Ubuntu-latest
 
     steps:
@@ -23,10 +35,11 @@ jobs:
     - uses: re-actors/build-python-dists@main
       with:
         dist-type: wheel
+        workflow-artifact-name: python-package-distributions
 
   matrix:
     needs:
-    - build
+    - wheel
     name: >-
       [m]
     uses: tox-dev/workflow/.github/workflows/tox.yml@main
