@@ -23,7 +23,6 @@ jobs:
     - uses: re-actors/build-python-dists@main
       with:
         dist-type: wheel
-        isolated-build-env: false
 
   matrix:
     needs:
