@@ -30,6 +30,8 @@ jobs:
         workflow-artifact-name: ${{ env.dists-artifact-name }}
 
   sdist-rebuild:
+    needs:
+    - sdist
     runs-on: Ubuntu-latest
 
     steps:
