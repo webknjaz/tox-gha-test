@@ -21,6 +21,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: re-actors/build-python-dists@main
+      with:
+        dist-type: wheel
+        isolated-build-env: false
 
   matrix:
     needs:
