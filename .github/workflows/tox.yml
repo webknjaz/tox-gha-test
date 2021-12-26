@@ -13,6 +13,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+
+env:
+  dists-artifact-name: python-package-distributions
+
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   sdist:
@@ -22,11 +27,21 @@ jobs:
     - uses: re-actors/build-python-dists@main
       with:
         dist-type: sdist
-        workflow-artifact-name: python-package-distributions
+        workflow-artifact-name: ${{ env.dists-artifact-name }}
+
+  sdist-rebuild:
+    runs-on: Ubuntu-latest
+
+    steps:
+    - uses: re-actors/build-python-dists@main
+      with:
+        build-source: sdist
+        dist-type: sdist
+        workflow-artifact-name: ${{ env.dists-artifact-name }}
 
   wheel:
     needs:
-    - sdist
+    - sdist-rebuild
     runs-on: Ubuntu-latest
 
     steps:
@@ -34,7 +49,19 @@ jobs:
       with:
         build-source: sdist
         dist-type: wheel
-        workflow-artifact-name: python-package-distributions
+        workflow-artifact-name: ${{ env.dists-artifact-name }}
+
+  dists:
+    needs:
+    - sdist-rebuild
+    - wheel
+    runs-on: Ubuntu-latest
+
+    steps:
+    - uses: re-actors/build-python-dists@main
+      with:
+        build-source: sdist
+        workflow-artifact-name: ${{ env.dists-artifact-name }}
 
   matrix:
     needs:
