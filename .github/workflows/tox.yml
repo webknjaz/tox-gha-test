@@ -19,7 +19,6 @@ jobs:
     runs-on: Ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
     - uses: re-actors/build-python-dists@main
       with:
         dist-type: sdist
@@ -31,7 +30,6 @@ jobs:
     runs-on: Ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
     - uses: re-actors/build-python-dists@main
       with:
         build-source: sdist
