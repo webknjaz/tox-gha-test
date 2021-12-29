@@ -25,9 +25,11 @@ jobs:
 
     steps:
     - uses: re-actors/build-python-dists@main
+      id: dists
       with:
         dist-type: sdist
         workflow-artifact-name: ${{ env.dists-artifact-name }}
+    - run: echo '${{ toJSON(steps.dists.outputs) }}'
 
   sdist-rebuild:
     needs:
@@ -36,10 +38,12 @@ jobs:
 
     steps:
     - uses: re-actors/build-python-dists@main
+      id: dists
       with:
         build-source: sdist
         dist-type: sdist
         workflow-artifact-name: ${{ env.dists-artifact-name }}
+    - run: echo '${{ toJSON(steps.dists.outputs) }}'
 
   wheel:
     needs:
@@ -48,10 +52,12 @@ jobs:
 
     steps:
     - uses: re-actors/build-python-dists@main
+      id: dists
       with:
         build-source: sdist
         dist-type: wheel
         workflow-artifact-name: ${{ env.dists-artifact-name }}
+    - run: echo '${{ toJSON(steps.dists.outputs) }}'
 
   dists:
     needs:
@@ -61,9 +67,11 @@ jobs:
 
     steps:
     - uses: re-actors/build-python-dists@main
+      id: dists
       with:
         build-source: sdist
         workflow-artifact-name: ${{ env.dists-artifact-name }}
+    - run: echo '${{ toJSON(steps.dists.outputs) }}'
 
   matrix:
     needs:
