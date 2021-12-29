@@ -65,6 +65,9 @@ jobs:
     - wheel
     runs-on: Ubuntu-latest
 
+    outputs:
+      wheels: ${{ steps.dists.outputs.wheels }}
+
     steps:
     - uses: re-actors/build-python-dists@main
       id: dists
@@ -75,7 +78,7 @@ jobs:
 
   matrix:
     needs:
-    - wheel
+    - dists
     name: >-
       [m]
     uses: tox-dev/workflow/.github/workflows/tox.yml@main
