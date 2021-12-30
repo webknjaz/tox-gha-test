@@ -83,6 +83,8 @@ jobs:
       [m]
     uses: tox-dev/workflow/.github/workflows/tox.yml@main
     with:
+      source-tarball-name: ${{ needs.dists.outputs.sdist }}
+      workflow-artifact-name: ${{ env.dists-artifact-name }}
       tox-env-matrix-hook: |
         deadsnakes_job_3_10 = {
           'custom-job-name': 'deadsnakes Python 3.10-dev',
@@ -93,6 +95,7 @@ jobs:
 
   process-matrix:
     needs:
+    - dists
     - matrix
 
     runs-on: Ubuntu-latest
