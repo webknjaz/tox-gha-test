@@ -84,7 +84,7 @@ jobs:
     - dists
     name: >-
       [m]
-    uses: tox-dev/gh-action-tox/.github/workflows/tox.yml@experiments/composite-action
+    uses: tox-dev/workflow/.github/workflows/tox.yml@main
     with:
       source-tarball-name: ${{ needs.dists.outputs.sdist }}
       workflow-artifact-name: ${{ needs.dists.outputs.workflow-artifact-name }}
