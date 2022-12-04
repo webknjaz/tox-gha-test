@@ -21,7 +21,7 @@ env:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   sdist:
-    runs-on: Ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: re-actors/build-python-dists@main
@@ -34,7 +34,7 @@ jobs:
   sdist-rebuild:
     needs:
     - sdist
-    runs-on: Ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: re-actors/build-python-dists@main
@@ -48,7 +48,7 @@ jobs:
   wheel:
     needs:
     - sdist-rebuild
-    runs-on: Ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: re-actors/build-python-dists@main
@@ -63,7 +63,7 @@ jobs:
     needs:
     - sdist-rebuild
     - wheel
-    runs-on: Ubuntu-latest
+    runs-on: ubuntu-latest
 
     outputs:
       dists: ${{ steps.dists.outputs.dists }}
@@ -84,7 +84,7 @@ jobs:
     - dists
     name: >-
       [m]
-    uses: tox-dev/workflow/.github/workflows/tox.yml@main
+    uses: tox-dev/gh-action-tox/.github/workflows/tox.yml@experiments/composite-action
     with:
       source-tarball-name: ${{ needs.dists.outputs.sdist }}
       workflow-artifact-name: ${{ needs.dists.outputs.workflow-artifact-name }}
@@ -101,10 +101,10 @@ jobs:
     - dists
     - matrix
 
-    runs-on: Ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - run: echo '${{ needs.matrix.outputs.json-results }}'
-    - uses: actions/setup-python@v2
+    - uses: actions/setup-python@v4
       with:
         python-version: >-
           3.10
